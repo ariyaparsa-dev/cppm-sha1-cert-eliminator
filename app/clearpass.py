@@ -39,8 +39,9 @@ def make_login(config: ClearPassConfig) -> ClearPassAPILogin:
     if config.client_id and config.client_secret:
         return ClearPassAPILogin(
             server=config.server,
-            client_id=config.client_id,
-            client_secret=config.client_secret,
+            granttype="client_credentials",
+            clientid=config.client_id,
+            clientsecret=config.client_secret,
             verify_ssl=config.verify_ssl,
         )
     raise ValueError("Provide api_token or both client_id and client_secret.")
