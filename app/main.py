@@ -125,9 +125,21 @@ async def scan():
     except Exception as exc:
         raise HTTPException(502, f"Scan failed: {exc}")
 
+    enabled_sha1 = sum(
+        1 for cert in sha1_certs
+        if cert.get("enabled") is True
+    )
+
+    disabled_sha1 = sum(
+        1 for cert in sha1_certs
+        if cert.get("enabled") is False
+    )
+
     return {
         "total_certs": total,
         "sha1_count": len(sha1_certs),
+        "enabled_sha1_count": enabled_sha1,
+        "disabled_sha1_count": disabled_sha1,
         "certs": [safe_serialize(c) for c in sha1_certs],
     }
 
