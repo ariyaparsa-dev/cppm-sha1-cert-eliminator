@@ -1,6 +1,7 @@
 """Shared ClearPass certificate logic used by both the CLI and web API."""
 
 import base64
+import json
 from dataclasses import dataclass
 from typing import Any, Optional
 
